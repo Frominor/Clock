@@ -29,6 +29,7 @@ export default function App() {
     }
     SetCount(Count + 1);
     UserAnswer.push(...[str]);
+    SetUserAnswer(UserAnswer)
   }
   React.useEffect(() => {
     if (Count == 10) {
