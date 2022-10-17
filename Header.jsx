@@ -1,6 +1,6 @@
 import React from "react";
-function Header({weather=0}) {
- console.log(weather)
+function Header() {
+ 
   return(
     <div className="header">
         <h1>Simple Weather App</h1>
@@ -8,3 +8,4 @@ function Header({weather=0}) {
   )
 }
 export default Header;
+
