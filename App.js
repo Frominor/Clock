@@ -1,64 +1,57 @@
 import React from "react";
 import "./App.css";
-import axios from 'axios'
-import Header from './Header'
-import Box from './Box'
+import SessionLength from './SessionLength'
+import BreakLength from './BreakLength'
+import Breakk from './Break'
+import  Display from './Display'
 export default function App() {
-  const [City,SetCity]=React.useState('')
-  const [Arr,SetArr]=React.useState([])
-  const [Weather,SetWeather]=React.useState([])
-  const[lat,Setlat]=React.useState(0)
-  const [lon,Setlon]=React.useState(0)
-  const[isRender,SetisRender]=React.useState(true)
-    React.useEffect(()=>{
-      if(lat>0){
-      axios.get(`https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=9e2676b5d5179f93b75b68b95d3b7bf3`).then((res)=>{
-        console.log(res)
-        Weather.push((Math.floor(res.data.main.temp)),res.data.weather[0].main,res.data.weather[0].description)
-            SetWeather(Weather)
-            Arr.push({City,...Weather})
-           do {
-            Weather.splice(0,1)
-           } while (Weather.length>0);
-            SetArr(Arr)  
-          SetisRender(true)
-      })
-      SetCity('')
-    }
-    return 
-    },[lat]) 
-  function showWeather(){
-    if(City.length>0){
-      axios.get(`http://api.openweathermap.org/geo/1.0/direct?q=${City}&limit=5&appid=9e2676b5d5179f93b75b68b95d3b7bf3`)
-      .then(res=>{
-        Weather.splice(0,1)
-        Weather.push(res.data[0].country)
-        SetWeather(Weather)
-        Setlat(res.data[0].lat)
-        Setlon(res.data[0].lon)
-      })
-      
-    }
-    SetisRender(false)
-  }
-function addCity(event){
-   SetCity(event.target.value)
-}
+  const [Minutes,SetMinutes]=React.useState(1)
+  const [Seconds,SetSeconds]=React.useState(0)
+  const [Break,SetBreak]=React.useState(5)
+ const [isActive,SetisActive]=React.useState(false)
+   const [bool,setBool]=React.useState(false)
+   function Reset(){
+    setBool(false)
+    SetMinutes(25)
+    SetBreak(5)
+   
+   }
+ function Start(){
+  setBool(true)
+ }
+ React.useEffect(()=>{  
+  if(bool==true){
+    let interval=setInterval(()=>{
+      clearInterval(interval)
+      if(Seconds===0){
+       if(Minutes!==0){
+         SetMinutes(Minutes-1)
+         SetSeconds(59)
+       }else{
+         let minutes=isActive?Minutes-1:Break-1
+         let seconds=59
+         SetSeconds(seconds)
+         SetMinutes(minutes)
+         SetisActive(!isActive)
+       }
+      }else{
+       SetSeconds(Seconds-1)
+      }
+     },1000)}else{
+      SetSeconds(0)
+     }
+ },[Seconds,bool])
+
   return (
-    <div className="main">
-      <Header></Header>
-      <div className="search">
-        <input type={'text'} placeholder='Search for the city' onChange={addCity} value={City}></input>
-        <button onClick={showWeather}>SUBMIT</button>
-      </div> 
-      <div className="WeatherInfo">  
-         <div className="Weather">
-                {Arr.map((item)=>{
-                  console.log(item)
-                  return <Box item={item}></Box>
-                })}
-         </div>
-      </div>
+    <div className="main" >
+      {isActive==true?<Breakk Minutes={Minutes} Seconds={Seconds}></Breakk>:<div><div className="timer">
+          <div className="Name"><h2>POMODORO CLOCK</h2></div>
+          <BreakLength Break={Break} SetBreak={SetBreak}></BreakLength>
+   <SessionLength Minutes={Minutes}   SetMinutes={SetMinutes}></SessionLength>
+         <Display Minutes={Minutes} Seconds={Seconds} Start={Start} Reset={Reset}></Display>
+       </div>
+  </div>}  
+   <h1>Designed By Frominor</h1> 
     </div>
   );
 }

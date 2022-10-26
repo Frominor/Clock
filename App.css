@@ -1,0 +1,110 @@
+body{
+  display: flex;
+  align-items: center;
+  align-self: center;
+  justify-content: center;
+ height: 900px;
+
+ background: rgb(2,0,36);
+background: linear-gradient(83deg, rgba(2,0,36,1) 13%, rgba(151,154,154,1) 100%);
+}
+.timer{
+ margin: 0 auto;
+  width: 400px;
+  text-align: center;
+  height: 400px;
+  background-color: black;
+ text-align: center;
+ position: relative;
+  border-radius: 50%;
+  outline:3px solid lightblue;
+  box-shadow: 1px 1px 8px 6px rgba(34, 60, 80, 1);
+}
+
+span{
+  color:#D87800;
+  font-weight: 700;
+  font-size:60px;
+  font-family:Arial, Helvetica, sans-serif;
+}
+.main{
+  width: 1000px;
+}
+.btns{
+  margin-top: 40px;
+  display: flex;
+  justify-content: space-between;
+}
+
+p{
+  text-align: center;
+    padding: 3px;
+    margin: 0;
+    color:#D87800;
+  font-size: 20px;
+}
+.imgs{
+  display: flex;
+  justify-content: center;
+}
+.time{
+  position: absolute;
+  top: 50%;
+  left: 46%;
+}
+.Name{
+  position: absolute;
+  top: 10%;
+  left: 23%;
+  color: white;
+}
+.BreakInfo{
+  position: absolute;
+  top: 25%;
+  left: 15%;
+}
+.SessionLength{
+  position: absolute;
+  top: 25%;
+  right: 10%;
+}
+
+h4{
+  color: #838996;
+  margin: 0px;
+  padding: 0px;
+  margin-bottom: 10px;
+}
+h3{
+  font-size: 30px;
+  color:#959CA0;
+  margin-bottom: 8px;
+}
+.display{
+  position: absolute;
+  left: 32%;
+  top: 35%;
+  z-index: 10;
+}
+.plus{
+  transform: rotate(180deg);
+}
+img{
+  z-index: 11;
+  width: 30px;
+  padding: 5px;
+  transition: 0.5s;
+}
+.minus{
+  transform: rotate(-180);
+}
+img:hover{
+  width: 35px;
+}
+h1{
+  position:absolute;
+  bottom: 0%;
+  left: 5%;
+  color: white;
+  font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif
+}
